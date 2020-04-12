@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="io.livri.ui.tag.create.TagCreateViewModel" />
+    </data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.task.create.TagCreateFragment">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="8dp">
+
+            <EditText
+                android:id="@+id/etName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:ems="10"
+                android:hint="Tag"
+                android:inputType="textCapSentences"
+                android:text="@={viewModel.tag.name}"
+                android:selectAllOnFocus="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Pick a Color"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/etName" />
+
+            <ImageButton
+                android:id="@+id/bc96AC32"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_marginTop="8dp"
+                android:tint="#FFFFFF"
+                app:TagPickColor='@{viewModel.tag.color.equals("96AC32")}'
+                android:backgroundTint="#96AC32"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/bc8C0202"/>
+
+            <ImageButton
+                android:id="@+id/bcA59401"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:tint="#FFFFFF"
+                app:TagPickColor='@{viewModel.tag.color.equals("A59401")}'
+                android:backgroundTint="#BDAD17"
+                app:layout_constraintStart_toEndOf="@+id/bc96AC32"
+                app:layout_constraintTop_toBottomOf="@+id/bc8C0202"/>
+
+            <ImageButton
+                android:id="@+id/bc9E5737"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:tint="#FFFFFF"
+                app:TagPickColor='@{viewModel.tag.color.equals("9E5737")}'
+                android:backgroundTint="#9E5737"
+                app:layout_constraintStart_toEndOf="@+id/bcA59401"
+                app:layout_constraintTop_toBottomOf="@+id/bc8C0202" />
+
+            <ImageButton
+                android:id="@+id/bcBE39DC"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:tint="#FFFFFF"
+                app:TagPickColor='@{viewModel.tag.color.equals("BE39DC")}'
+                android:backgroundTint="#BE39DC"
+                app:layout_constraintStart_toEndOf="@+id/bc9E5737"
+                app:layout_constraintTop_toBottomOf="@+id/bc8C0202" />
+
+            <ImageButton
+                android:id="@+id/bcA10273"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:tint="#FFFFFF"
+                app:TagPickColor='@{viewModel.tag.color.equals("A10273")}'
+                android:backgroundTint="#A10273"
+                app:layout_constraintStart_toEndOf="@+id/bcBE39DC"
+                app:layout_constraintTop_toBottomOf="@+id/bc8C0202" />
+
+            <ImageButton
+                android:id="@+id/bc246167"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:tint="#FFFFFF"
+                app:TagPickColor='@{viewModel.tag.color.equals("246167")}'
+                android:backgroundTint="#246167"
+                app:layout_constraintStart_toEndOf="@+id/bcA10273"
+                app:layout_constraintTop_toBottomOf="@+id/bc8C0202" />
+
+            <ImageButton
+                android:id="@+id/bc8C0202"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_marginTop="8dp"
+                android:tint="#FFFFFF"
+                app:TagPickColor='@{viewModel.tag.color.equals("8C0202")}'
+                android:backgroundTint="#8C0202"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+            <ImageButton
+                android:id="@+id/bcFF9800"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:tint="#FFFFFF"
+                app:TagPickColor='@{viewModel.tag.color.equals("FF9800")}'
+                android:backgroundTint="#FF9800"
+                app:layout_constraintStart_toEndOf="@+id/bc8C0202"
+                app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+            <ImageButton
+                android:id="@+id/bc1A8F05"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:tint="#FFFFFF"
+                app:TagPickColor='@{viewModel.tag.color.equals("1A8F05")}'
+                android:backgroundTint="#1A8F05"
+                app:layout_constraintStart_toEndOf="@+id/bcFF9800"
+                app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+            <ImageButton
+                android:id="@+id/bc673AB7"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:tint="#FFFFFF"
+                app:TagPickColor='@{viewModel.tag.color.equals("673AB7")}'
+                android:backgroundTint="#673AB7"
+                app:layout_constraintStart_toEndOf="@+id/bc1A8F05"
+                app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+            <ImageButton
+                android:id="@+id/bc0218A3"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:tint="#FFFFFF"
+                app:TagPickColor='@{viewModel.tag.color.equals("0218A3")}'
+                android:backgroundTint="#0218A3"
+                app:layout_constraintStart_toEndOf="@+id/bc673AB7"
+                app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+            <ImageButton
+                android:id="@+id/bc00BCD4"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:tint="#FFFFFF"
+                app:TagPickColor='@{viewModel.tag.color.equals("00BCD4")}'
+                android:backgroundTint="#00BCD4"
+                app:layout_constraintStart_toEndOf="@+id/bc0218A3"
+                app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+            <ImageButton
+                android:id="@+id/bc6E7273"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:tint="#FFFFFF"
+                app:TagPickColor='@{viewModel.tag.color.equals("6E7273")}'
+                android:backgroundTint="#6E7273"
+                app:layout_constraintStart_toEndOf="@+id/bc00BCD4"
+                app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+            <ImageButton
+                android:id="@+id/bc000000"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:tint="#FFFFFF"
+                app:TagPickColor='@{viewModel.tag.color.equals("000000")}'
+                android:backgroundTint="#000000"
+                app:layout_constraintStart_toEndOf="@+id/bc246167"
+                app:layout_constraintTop_toBottomOf="@+id/bc8C0202"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="@dimen/fab_margin"
+        app:srcCompat="@drawable/ic_save_white_24dp" />
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>

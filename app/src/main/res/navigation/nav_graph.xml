@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/taskListFragment">
+
+    <fragment
+        android:id="@+id/taskListFragment"
+        android:name="io.livri.ui.task.list.TaskListFragment"
+        android:label="Livri"
+        tools:layout="@layout/task_list_fragment" >
+        <action
+            android:id="@+id/action_taskListFragment_to_taskDetailFragment"
+            app:destination="@id/taskDetailFragment" />
+        <action
+            android:id="@+id/action_taskListFragment_to_taskCreateFragment"
+            app:destination="@id/taskCreateFragment" />
+        <action
+            android:id="@+id/action_taskListFragment_to_tagListFragment"
+            app:destination="@id/tagListFragment" />
+        <action
+            android:id="@+id/action_taskListFragment_to_userProfileFragment"
+            app:destination="@id/userProfileFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/taskDetailFragment"
+        android:name="io.livri.ui.task.detail.TaskDetailFragment"
+        android:label=" "
+        tools:layout="@layout/task_detail_fragment" >
+        <argument
+            android:name="selectedTask"
+            app:argType="io.livri.domain.Task"/>
+        <action
+            android:id="@+id/action_taskDetailFragment_to_taskListFragment"
+            app:destination="@+id/taskListFragment"
+            app:launchSingleTop="false"
+            app:popUpTo="@id/taskListFragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_taskDetailFragment_to_tagListFragment"
+            app:destination="@id/tagListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/taskCreateFragment"
+        android:name="io.livri.ui.task.create.TaskCreateFragment"
+        android:label=" "
+        tools:layout="@layout/task_create_fragment" >
+        <action
+            android:id="@+id/action_taskCreateFragment_to_taskListFragment"
+            app:destination="@id/taskListFragment"
+            app:launchSingleTop="false"
+            app:popUpTo="@id/taskListFragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_taskCreateFragment_to_tagListFragment"
+            app:destination="@id/tagListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/tagListFragment"
+        android:name="io.livri.ui.tag.list.TagListFragment"
+        android:label="Tags"
+        tools:layout="@layout/tag_list_fragment" >
+        <action
+            android:id="@+id/action_tagListFragment_to_taskListFragment"
+            app:destination="@id/taskListFragment"
+            app:popUpTo="@id/taskListFragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_tagListFragment_to_tagCreateFragment"
+            app:destination="@id/tagCreateFragment" />
+        <action
+            android:id="@+id/action_tagListFragment_to_taskDetailFragment"
+            app:destination="@id/taskDetailFragment"
+            app:popUpTo="@id/taskDetailFragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_tagListFragment_to_taskCreateFragment"
+            app:destination="@id/taskCreateFragment"
+            app:popUpTo="@id/tagCreateFragment"
+            app:popUpToInclusive="true" />
+        <argument
+            android:name="origin"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/tagCreateFragment"
+        android:name="io.livri.ui.tag.create.TagCreateFragment"
+        android:label=" " >
+        <action
+            android:id="@+id/action_tagCreateFragment_to_tagListFragment"
+            app:destination="@id/tagListFragment"
+            app:popUpTo="@id/tagListFragment"
+            app:popUpToInclusive="true" />
+        <argument
+            android:name="origin"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/userProfileFragment"
+        android:name="io.livri.ui.user.UserProfileFragment"
+        android:label="user_profile_fragment"
+        tools:layout="@layout/user_profile_fragment" />
+
+</navigation>

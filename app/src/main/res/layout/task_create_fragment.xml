@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="io.livri.ui.task.create.TaskCreateViewModel" />
+    </data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.task.create.TaskCreateFragment">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="8dp">
+
+            <EditText
+                android:id="@+id/etName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:ems="10"
+                android:hint="Task"
+                android:inputType="textCapSentences"
+                android:text="@={viewModel.task.name}"
+                android:selectAllOnFocus="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tvDueDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/etName"
+                app:DateFormat="@{viewModel.task.dueDate}" />
+
+            <RadioGroup
+                android:id="@+id/rgFrequency"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="8dp"
+                android:hint="Frequency"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvDueDate">
+
+                <RadioButton
+                    android:id="@+id/radioOnce"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:checked='@{viewModel.task.frequency.equals("o")}'
+                    android:onClick='@{() -> viewModel.onFrequencyRadioButtonClick("o")}'
+                    android:text="Once" />
+
+                <RadioButton
+                    android:id="@+id/radioDaily"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:checked='@{viewModel.task.frequency.equals("d")}'
+                    android:onClick='@{() -> viewModel.onFrequencyRadioButtonClick("d")}'
+                    android:text="Daily" />
+
+                <RadioButton
+                    android:id="@+id/radioMontly"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:checked='@{viewModel.task.frequency.equals("m")}'
+                    android:onClick='@{() -> viewModel.onFrequencyRadioButtonClick("m")}'
+                    android:text="Monthly" />
+
+                <RadioButton
+                    android:id="@+id/radioAnnually"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:checked='@{viewModel.task.frequency.equals("a")}'
+                    android:onClick='@{() -> viewModel.onFrequencyRadioButtonClick("a")}'
+                    android:text="Annually" />
+            </RadioGroup>
+
+            <TextView
+                android:id="@+id/tvTag"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Tag"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/rgFrequency" />
+
+            <TextView
+                android:id="@+id/tvTags"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:textColor="#ffffff"
+                app:TagTextView="@{viewModel.task.tags}"
+                app:layout_constraintStart_toEndOf="@+id/tvTag"
+                app:layout_constraintTop_toTopOf="@+id/tvTag" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="@dimen/fab_margin"
+        app:srcCompat="@drawable/ic_save_white_24dp" />
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>
