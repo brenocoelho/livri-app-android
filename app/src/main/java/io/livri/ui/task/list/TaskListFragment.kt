@@ -18,6 +18,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import io.livri.databinding.TaskListFragmentBinding
 
 import io.livri.R
+import io.livri.domain.Task
 import kotlinx.android.synthetic.main.task_list_bottom_sheet.view.*
 import kotlinx.android.synthetic.main.task_list_date_postpone.view.*
 import timber.log.Timber
@@ -44,7 +45,7 @@ class TaskListFragment : Fragment() {
         super.onCreate(savedInstanceState)
 
         taskListTagSharedViewModel = activity?.run {
-            ViewModelProviders.of(this)[TaskListTagSharedViewModel::class.java]
+            ViewModelProvider(this)[TaskListTagSharedViewModel::class.java]
         } ?: throw Exception("Invalid Activity")
 
         val dateView = layoutInflater.inflate(R.layout.task_list_date_postpone, null)
@@ -75,9 +76,9 @@ class TaskListFragment : Fragment() {
             dateDialog.hide()
         }
 
-        dateDialog.setOnDismissListener {
-            viewModel.refreshTasks()
-        }
+//        dateDialog.setOnDismissListener {
+//            viewModel.refreshTasks()
+//        }
 
     }
 
@@ -93,8 +94,6 @@ class TaskListFragment : Fragment() {
 
         // Giving the binding access to the OverviewViewModel
         binding.viewModel = viewModel
-
-        viewModel.refreshTasks()
 
         // Sets the adapter of the taskGrid RecyclerView
         val taskGridAdapter = TaskGridAdapter(TaskGridAdapter.OnClickListener {
@@ -125,9 +124,9 @@ class TaskListFragment : Fragment() {
 
         taskListTagSharedViewModel.selected.observe(viewLifecycleOwner, Observer {
             if (taskListTagSharedViewModel.selected()) {
-                viewModel.setSearchTag(it.color + it.name)
+                viewModel.updateFilter(it.color + it.name)
                 taskListTagSharedViewModel.clean()
-            }
+           }
         })
 
         enableSwipe(binding.tasksGrid, taskGridAdapter, this.context!!)
@@ -135,7 +134,6 @@ class TaskListFragment : Fragment() {
         binding.bar.replaceMenu(R.menu.task_list_menu)
 
         binding.bar.setOnMenuItemClickListener {item: MenuItem? ->
-            Timber.i(item.toString())
             when (item?.itemId) {
                 R.id.action_filter -> {
                     val view = layoutInflater.inflate(R.layout.task_list_bottom_sheet, null)
@@ -144,7 +142,7 @@ class TaskListFragment : Fragment() {
 
                     view.tvTaskListAll.setOnClickListener {
                         dialog.hide()
-                        viewModel.setSearchTag(null)
+                        viewModel.updateFilter("all")
                         taskListTagSharedViewModel.clean()
                     }
 

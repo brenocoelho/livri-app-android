@@ -24,7 +24,7 @@ import java.util.Date
 /**
  * When there is no Mars property data (data is null), hide the [RecyclerView], otherwise show it.
  */
-@BindingAdapter("taskListData")
+@BindingAdapter("app:taskListData")
 fun bindTaskRecyclerView(recyclerView: RecyclerView, data: List<Task>?) {
     val adapter = recyclerView.adapter as TaskGridAdapter
     adapter.submitList(data)

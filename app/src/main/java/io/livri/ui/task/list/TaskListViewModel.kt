@@ -25,17 +25,21 @@ class TaskListViewModel(application: Application) : AndroidViewModel(application
     private val database = LivriDatabase.getInstance(application)
     private val tasksRepository = TasksRepository(database)
 
-    val tasks = tasksRepository.tasks
+    private val _searchTag = MutableLiveData("all")
+
+    val searchTag: LiveData<String>
+        get() = _searchTag
+
+    val tasks: LiveData<List<Task>> = Transformations.switchMap(
+        _searchTag,
+        ::tasksFilter
+    )
+    private fun tasksFilter(tag: String) = tasksRepository.searchTasks(tag)
 
     private val _status = MutableLiveData<TaskListApiStatus>()
 
     val status: LiveData<TaskListApiStatus>
         get() = _status
-
-    private val _searchTag = MutableLiveData<String>()
-
-    val searchTag: LiveData<String>
-        get() = _searchTag
 
     private val _navigateToSelectedTask = MutableLiveData<Task>()
 
@@ -52,29 +56,15 @@ class TaskListViewModel(application: Application) : AndroidViewModel(application
      * Call refreshTasks() on init so we can display status immediately.
      */
     init {
-        coroutineScope.launch {
-            try {
-                _status.value = TaskListApiStatus.LOADING
-
-                tasksRepository.getDataFromDatabase(_searchTag.value)
-                tasksRepository.refreshDataFromNetwork()
-                tasksRepository.getDataFromDatabase(_searchTag.value)
-
-                _status.value = TaskListApiStatus.DONE
-            } catch (e: Exception) {
-                _status.value = TaskListApiStatus.ERROR
-                Timber.e(e.toString())
-            }
-        }
     }
 
     fun refreshTasks() {
+        Timber.i("refreshTasks")
         coroutineScope.launch {
             try {
                 _status.value = TaskListApiStatus.LOADING
 
                 tasksRepository.refreshDataFromNetwork()
-                tasksRepository.getDataFromDatabase(_searchTag.value)
 
                 _status.value = TaskListApiStatus.DONE
             } catch (e: Exception) {
@@ -85,10 +75,10 @@ class TaskListViewModel(application: Application) : AndroidViewModel(application
         _status.value = TaskListApiStatus.DONE
     }
 
-    fun setSearchTag(tag: String?) {
+    fun updateFilter(tag: String) {
+        Timber.i("updateFilter: $tag")
         coroutineScope.launch {
-            _searchTag.value = tag
-            tasksRepository.getDataFromDatabase(_searchTag.value)
+           apply { _searchTag.postValue(tag)  }
         }
     }
 
@@ -103,8 +93,6 @@ class TaskListViewModel(application: Application) : AndroidViewModel(application
                 task.dueDate = calendar.time
 
                 tasksRepository.update(task.id, task)
-                tasksRepository.refreshDataFromNetwork()
-                tasksRepository.getDataFromDatabase(_searchTag.value)
 
             } catch (e: Exception) {
                 Timber.e(e.toString())
@@ -134,9 +122,6 @@ class TaskListViewModel(application: Application) : AndroidViewModel(application
                 }
 
                 tasksRepository.delete(task.id)
-                tasksRepository.refreshDataFromNetwork()
-                tasksRepository.getDataFromDatabase(_searchTag.value)
-
             } catch (e: Exception) {
                 Timber.e(e.toString())
             }

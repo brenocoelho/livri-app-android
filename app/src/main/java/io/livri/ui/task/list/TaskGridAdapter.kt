@@ -2,6 +2,8 @@ package io.livri.ui.task.list
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Filter
+import android.widget.Filterable
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -10,8 +12,7 @@ import io.livri.domain.Task
 
 class TaskGridAdapter(val onClickListener: OnClickListener): ListAdapter<Task, TaskGridAdapter.TaskViewHolder>(DiffCallback) {
 
-    class TaskViewHolder(private var binding: TaskListGridViewItemBinding):
-        RecyclerView.ViewHolder(binding.root) {
+    class TaskViewHolder(private var binding: TaskListGridViewItemBinding): RecyclerView.ViewHolder(binding.root) {
         fun bind(task: Task) {
             binding.task = task
             binding.executePendingBindings()
@@ -52,4 +53,5 @@ class TaskGridAdapter(val onClickListener: OnClickListener): ListAdapter<Task, T
     class OnClickListener(val clickListener: (task: Task) -> Unit) {
         fun onClick(task: Task) = clickListener(task)
     }
+
 }

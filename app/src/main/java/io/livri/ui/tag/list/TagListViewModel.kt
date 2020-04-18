@@ -43,20 +43,7 @@ class TagListViewModel(application: Application) : AndroidViewModel(application)
      * Call loadTags() on init so we can display status immediately.
      */
     init {
-        coroutineScope.launch {
-            try {
-                _status.value = TagListApiStatus.LOADING
 
-                tagsRepository.getDataFromDatabase()
-                tagsRepository.refreshDataFromNetwork()
-                tagsRepository.getDataFromDatabase()
-
-                _status.value = TagListApiStatus.DONE
-            } catch (e: Exception) {
-                _status.value = TagListApiStatus.ERROR
-                Timber.e(e.toString())
-            }
-        }
     }
 
     fun refreshTags() {
@@ -66,7 +53,6 @@ class TagListViewModel(application: Application) : AndroidViewModel(application)
                 _status.value = TagListApiStatus.LOADING
 
                 tagsRepository.refreshDataFromNetwork()
-                tagsRepository.getDataFromDatabase()
 
                 _status.value = TagListApiStatus.DONE
             } catch (e: Exception) {
@@ -80,8 +66,8 @@ class TagListViewModel(application: Application) : AndroidViewModel(application)
         coroutineScope.launch {
             try {
                 tagsRepository.delete(tag.id)
-                tagsRepository.refreshDataFromNetwork()
-                tagsRepository.getDataFromDatabase()
+//                tagsRepository.refreshDataFromNetwork()
+//                tagsRepository.getDataFromDatabase()
             } catch (e: Exception) {
                 Timber.e(e.toString())
             }

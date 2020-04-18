@@ -63,3 +63,15 @@ fun TasksNetworkContainer.asDatabaseModel(): Array<TaskDatabase> {
             frequency = it.frequency)
     }.toTypedArray()
 }
+
+fun TaskNetworkResponse.asDatabaseModel(): TaskDatabase {
+    return data.let {
+        TaskDatabase(
+            id = it.id,
+            name = it.name,
+            dueDate = it.dueDate,
+            tags = it.tags,
+            status = it.status,
+            frequency = it.frequency)
+    }
+}

@@ -55,3 +55,13 @@ fun TagsNetworkContainer.asDatabaseModel(): Array<TagDatabase> {
             priority = it.priority)
     }.toTypedArray()
 }
+
+fun TagNetworkResponse.asDatabaseModel(): TagDatabase {
+    return data.let {
+        TagDatabase(
+            id = it.id,
+            name = it.name,
+            color = it.color,
+            priority = it.priority)
+    }
+}
