@@ -102,5 +102,14 @@
         android:name="io.livri.ui.user.UserProfileFragment"
         android:label="user_profile_fragment"
         tools:layout="@layout/user_profile_fragment" />
+    <fragment
+        android:id="@+id/userLoginFragment"
+        android:name="io.livri.ui.user.login.UserLoginFragment"
+        android:label="UserLoginFragment" />
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="io.livri.ui.login.LoginFragment"
+        android:label="login_fragment"
+        tools:layout="@layout/login_fragment" />
 
 </navigation>

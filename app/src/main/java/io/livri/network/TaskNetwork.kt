@@ -16,7 +16,7 @@ import java.util.*
 data class TaskNetwork(
     val id: String,
     var name: String,
-    @Json(name = "when") var dueDate: Date,
+    @Json(name = "due_date") var dueDate: Date,
     var tags: String?,
     var status: String,
     var frequency: String

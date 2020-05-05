@@ -5,7 +5,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import io.livri.database.LivriDatabase
-import io.livri.repository.UsersRepository
+import io.livri.repository.UserRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -21,7 +21,7 @@ class UserProfileViewModel(application: Application) : AndroidViewModel(applicat
     private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main )
 
     private val database = LivriDatabase.getInstance(application)
-    private val usersRepository = UsersRepository(database)
+    private val usersRepository = UserRepository(database)
 
     val user = usersRepository.user
 
@@ -33,9 +33,7 @@ class UserProfileViewModel(application: Application) : AndroidViewModel(applicat
         }
     }
 
-    class Factory(
-        private val application: Application
-    ) : ViewModelProvider.Factory {
+    class Factory(private val application: Application) : ViewModelProvider.Factory {
         @Suppress("unchecked_cast")
         override fun <T : ViewModel?> create(modelClass: Class<T>): T {
             if (modelClass.isAssignableFrom(UserProfileViewModel::class.java)) {

@@ -20,23 +20,38 @@ data class UserNetwork(
     var document: String,
     var email: String,
     var phone: String,
-    @Json(name = "digital_hash") var digitalHash: String?
+    @Json(name = "token") var token: String?
+)
+
+@JsonClass(generateAdapter = true)
+data class LoginNetwork(
+    var username: String,
+    var password: String
 )
 
 @JsonClass(generateAdapter = true)
 data class UsersNetworkContainer(val data: List<UserNetwork>)
 
 @JsonClass(generateAdapter = true)
-data class UserNetworkRequest(val tag: UserNetwork)
+data class UserNetworkRequest(val user: UserNetwork)
 
 @JsonClass(generateAdapter = true)
 data class UserNetworkResponse(val data: UserNetwork)
 
 
+@JsonClass(generateAdapter = true)
+data class LoginNetworkRequest(val user: LoginNetwork)
+
+@JsonClass(generateAdapter = true)
+data class LoginNetworkResponse(val data: UserNetwork)
+
 /**
  * Convert Network results to database objects
  */
 
+fun LoginNetwork.asRequest(): LoginNetworkRequest {
+    return LoginNetworkRequest(this)
+}
 fun UserNetwork.asRequest(): UserNetworkRequest {
     return UserNetworkRequest(this)
 }
@@ -51,7 +66,7 @@ fun UsersNetworkContainer.asDomainModel(): List<User> {
             phone = it.phone,
             username = it.username,
             document = it.document,
-            digitalHash = it.digitalHash)
+            token = it.token)
     }
 }
 
@@ -65,7 +80,7 @@ fun UserNetworkResponse.asDatabaseModel():UserDatabase {
             phone = it.phone,
             username = it.username,
             document = it.document,
-            digitalHash = it.digitalHash)
+            token = it.token)
     }
 }
 
@@ -79,6 +94,22 @@ fun UsersNetworkContainer.asDatabaseModel(): Array<UserDatabase> {
             phone = it.phone,
             username = it.username,
             document = it.document,
-            digitalHash = it.digitalHash)
+            token = it.token)
     }.toTypedArray()
+}
+
+
+
+fun LoginNetworkResponse.asDatabaseModel():UserDatabase {
+    return data.let {
+        UserDatabase(
+            id = it.id,
+            firstName = it.firstName,
+            lastName = it.lastName,
+            email = it.email,
+            phone = it.phone,
+            username = it.username,
+            document = it.document,
+            token = it.token)
+    }
 }

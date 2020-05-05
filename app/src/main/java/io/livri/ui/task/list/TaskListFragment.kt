@@ -19,6 +19,7 @@ import io.livri.databinding.TaskListFragmentBinding
 
 import io.livri.R
 import io.livri.domain.Task
+import io.livri.ui.login.LoginViewModel
 import kotlinx.android.synthetic.main.task_list_bottom_sheet.view.*
 import kotlinx.android.synthetic.main.task_list_date_postpone.view.*
 import timber.log.Timber
@@ -26,6 +27,7 @@ import java.util.*
 
 class TaskListFragment : Fragment() {
 
+    private lateinit var loginViewModel: LoginViewModel
 
     private lateinit var taskListTagSharedViewModel: TaskListTagSharedViewModel
 
@@ -43,6 +45,10 @@ class TaskListFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+//        loginViewModel = activity?.run {
+//            ViewModelProvider(this)[LoginViewModel::class.java]
+//        } ?: throw Exception("Invalid Activity")
 
         taskListTagSharedViewModel = activity?.run {
             ViewModelProvider(this)[TaskListTagSharedViewModel::class.java]
@@ -158,8 +164,8 @@ class TaskListFragment : Fragment() {
         }
 
         binding.bar.setNavigationOnClickListener {
-            this.findNavController().navigate(TaskListFragmentDirections.actionTaskListFragmentToUserProfileFragment())
-            Toast.makeText(this.context, "Navigation Click", Toast.LENGTH_SHORT).show()
+//            this.findNavController().navigate(R.id.userLoginFragment)
+            this.findNavController().navigate(R.id.loginFragment)
         }
 
 

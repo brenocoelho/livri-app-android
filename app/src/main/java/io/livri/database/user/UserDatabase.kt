@@ -29,7 +29,7 @@ data class UserDatabase constructor(
     var document: String,
 
     @ColumnInfo(name = "digital_hash")
-    var digitalHash: String?
+    var token: String?
 )
 
 
@@ -42,7 +42,7 @@ fun UserDatabase.asDomainModel(): User {
             phone= phone,
             document = document,
             username = username,
-            digitalHash = digitalHash)
+            token = token)
 }
 
 fun List<UserDatabase>.asDomainModel(): List<User> {
@@ -55,6 +55,6 @@ fun List<UserDatabase>.asDomainModel(): List<User> {
             phone= it.phone,
             document = it.document,
             username = it.username,
-            digitalHash = it.digitalHash)
+            token = it.token)
     }
 }

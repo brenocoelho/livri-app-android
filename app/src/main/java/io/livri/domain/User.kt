@@ -16,7 +16,7 @@ data class User(
     var document: String,
     var email: String,
     var phone: String,
-    var digitalHash:String?
+    var token:String?
 ): Parcelable {
 
 }
